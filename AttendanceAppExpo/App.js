@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Feather } from '@expo/vector-icons';
 import { SafeAreaView, StyleSheet, Text, View, TextInput, Button, TouchableOpacity, FlatList } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import IconButton from './iconButton';
+import IconButton from "./iconButton";
+// import AsyncStorage from '@react-native-async-storage/async-storage';
+// import IconButton from './iconButton';
 
 const App = () => {
   const [currentDate, setCurrentDate] = useState('');
@@ -12,7 +13,11 @@ const App = () => {
       '/' +
       (new Date().getMonth() + 1) +
       '/' + 
-      new Date().getFullYear(),
+      new Date().getFullYear() 
+      // ' ' + 
+      // new Date().getHours() +
+      // ' ' + hours + ':' +
+      // new Date().getMinutes() 
     );
     saveDate()
     getSavedDate();
@@ -33,6 +38,11 @@ const App = () => {
       const date = await AsyncStorage.getItem('DATE');
       console.log(date);
     };
+
+    const handleButtonPress = () => {
+      alert('Successfully checked in!');
+    };
+    
     return (
       <View style = {{flex: 1}}>
       <Text
@@ -43,16 +53,17 @@ const App = () => {
         marginTop: 100,
       }}>
         {currentDate}
-        <IconButton></IconButton>
       </Text>
+      <IconButton
+        buttonIcon="check"
+        label="CHECK IN"
+        name="JASON CHUNG"
+        onPress={handleButtonPress}
+        captionIcon="map-pin"
+        caption="LOCATION -"
+      />
       </View>
     );
 };
 
 export default App;
-
-
-
-
-
-

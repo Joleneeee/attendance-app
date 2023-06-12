@@ -1,88 +1,106 @@
 import React, { useState, useEffect } from "react";
-import { Feather } from '@expo/vector-icons';
-import { SafeAreaView, StyleSheet, Text, View, TextInput, Button, TouchableOpacity, FlatList } from 'react-native';
-import Alert from './alert';
+import { Feather } from "@expo/vector-icons";
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Button,
+  TouchableOpacity,
+  FlatList,
+} from "react-native";
+import Alert from "./alert";
 
-const IconButton = ({ buttonIcon, label, name, onPress, captionIcon, caption }) => {
+const IconButton = ({
+  buttonIcon,
+  label,
+  name,
+  onPress,
+  captionIcon,
+  caption,
+}) => {
   const [isCheckedIn, setIsCheckedIn] = useState(false);
-  
+
   const handleButtonPress = () => {
-    setIsCheckedIn(true);   
-       
+    setIsCheckedIn(true);
   };
 
   return (
     <View style={styles.container}>
-    <Text style={styles.name}>{name}</Text>
-    <TouchableOpacity style={styles.button} onPress={onPress}>
-      <View style={styles.buttonContent}>
-        <Feather name={buttonIcon} size={100} color="white" />
-        <Text style={styles.label}>{label}</Text>
-        {isCheckedIn && <Text style={styles.successMessage}>Successfully checked in!</Text>}
+      <Text style={styles.name}>{name}</Text>
+      <TouchableOpacity style={styles.button} onPress={onPress}>
+        <View style={styles.buttonContent}>
+          <Feather name={buttonIcon} size={100} color="white" />
+          <Text style={styles.label}>{label}</Text>
+          {isCheckedIn && (
+            <Text style={styles.successMessage}>Successfully checked in!</Text>
+          )}
         </View>
-    </TouchableOpacity>
-    <View style={styles.captionContainer}>
-      <Feather name={captionIcon} size={26} color="black" />
-      <Text style={styles.caption}>{caption}</Text>
-    </View>
-    <View style={styles.containerBelow}>
-      <View style={styles.columnBelow}>
-        <Feather name="clock" size={24} color="black" />
-        <Text style={styles.captionBelow}>Duration</Text>
+      </TouchableOpacity>
+      <View style={styles.captionContainer}>
+        <Feather name={captionIcon} size={26} color="black" />
+        <Text style={styles.caption}>{caption}</Text>
       </View>
-      <View style={styles.columnBelow}>
-        <Feather name="sunrise" size={24} color="black" />
-        <Text style={styles.captionBelow}>Check In</Text>
+      <View style={styles.containerBelow}>
+        <View style={styles.columnBelow}>
+          <Feather name="clock" size={24} color="black" />
+          <Text style={styles.captionBelow}>Duration</Text>
+        </View>
+        <View style={styles.columnBelow}>
+          <Feather name="sunrise" size={24} color="black" />
+          <Text style={styles.captionBelow}>Check In</Text>
+        </View>
+        <View style={styles.columnBelow}>
+          <Feather name="sunset" size={24} color="black" />
+          <Text style={styles.captionBelow}>Check Out</Text>
+        </View>
       </View>
-      <View style={styles.columnBelow}>
-        <Feather name="sunset" size={24} color="black" />
-        <Text style={styles.captionBelow}>Check Out</Text>
-      </View>
-    </View>
     </View>
   );
 };
 
+export default IconButton;
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   name: {
     marginTop: 110,
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
   button: {
-    backgroundColor: '#000000',
+    backgroundColor: "#000000",
     borderRadius: 400,
     width: 300,
-    height: 300, 
-    alignItems: 'center',
-    justifyContent: 'center',
+    height: 300,
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 30,
   },
   buttonContent: {
     // flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: "center",
     marginLeft: 5,
     marginBottom: 15,
   },
   label: {
     marginTop: 11,
-    color: 'white',
+    color: "white",
     fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
   },
   successMessage: {
     marginTop: 8,
-    color: 'white',
+    color: "white",
     fontSize: 14,
-    textAlign: 'center',
+    textAlign: "center",
   },
   captionContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     // alignItems: 'center',
     marginTop: 20,
   },
@@ -91,21 +109,21 @@ const styles = StyleSheet.create({
     marginBottom: 18,
     marginTop: 4,
     fontSize: 15,
-    textAlign: 'center',
+    textAlign: "center",
   },
   containerBelow: {
-    flexDirection: 'column',
-    flexWrap: 'wrap',
+    flexDirection: "column",
+    flexWrap: "wrap",
     marginTop: 10,
-    justifyContent: 'space-between',
+    justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingVertical: 20,
-    backgroundColor: '#F5F5F5',
+    backgroundColor: "#F5F5F5",
     height: 250,
     width: 280,
   },
   columnBelow: {
-    alignItems: 'center',
+    alignItems: "center",
     columnGap: 10,
   },
   captionBelow: {
@@ -114,9 +132,3 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
 });
-
-export default IconButton;
-
-
-
-

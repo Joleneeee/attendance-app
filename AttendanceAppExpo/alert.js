@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Feather } from '@expo/vector-icons';
 import { SafeAreaView, StyleSheet, Text, View, TextInput, Button, TouchableOpacity, FlatList } from 'react-native';
-import IconButton from './iconButton';
 
-const Alert = () => {
+const App = () => {
   const handleButtonPress = () => {
     alert('Successfully checked in!');
   };
@@ -22,4 +21,4 @@ return (
 );
 };
 
-export default Alert;
+export default App;

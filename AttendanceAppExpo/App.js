@@ -6,22 +6,22 @@ import IconButton from "./iconButton";
 // import IconButton from './iconButton';
 
 const App = () => {
-  const [currentDate, setCurrentDate] = useState('');
+  const [currentDate, setCurrentDate, setCurrentTime] = useState('');
+
   useEffect(() => {
-    setCurrentDate(
-      new Date().getDate() +
-      '/' +
-      (new Date().getMonth() + 1) +
-      '/' + 
-      new Date().getFullYear() 
-      // ' ' + 
-      // new Date().getHours() +
-      // ' ' + hours + ':' +
-      // new Date().getMinutes() 
-    );
-    saveDate()
-    getSavedDate();
-    }, []);
+      var date = new Date().getDate() // current Date
+      var month = new Date().getMonth() + 1 // current Month
+      var year = new Date().getFullYear() // current Year
+      var hours = new Date().getHours() + 1 // current Hours
+      var min = new Date().getMinutes() // current Minutes
+      var sec = new Date().getSeconds() // current Seconds
+      setCurrentDate(
+        date + '/' + month + '/' + year + ' ' 
+      )
+      setCurrentTime(
+        hours + ':' + min + ':' + sec
+      )
+    }, [])
 
     const saveDate = async () => {
       await AsyncStorage.setItem(

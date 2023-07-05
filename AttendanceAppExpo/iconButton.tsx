@@ -15,21 +15,28 @@ import Alert from "./alert";
 const IconButton = ({
   buttonIcon,
   label,
-  name,
   onPress,
   captionIcon,
   caption,
+  status,
+  time,
+  location
 }) => {
   const [isCheckedIn, setIsCheckedIn] = useState(false);
+  const [name, setName] = useState(" ");
+  const [id, setId] = useState("0");
 
   const handleButtonPress = () => {
     setIsCheckedIn(true);
   };
 
+
   return (
     <View style={styles.container}>
-      <Text style={styles.name}>{name}</Text>
-      <TouchableOpacity style={styles.button} onPress={onPress}>
+      <TextInput style={styles.name} placeholder="Your Name" onChangeText={value => setName(value)} />
+      <TextInput style={styles.id} placeholder="Your ID" onChangeText={value => setId(value)} />
+
+      <TouchableOpacity style={styles.button} onPress={() => onPress(name, id)}>
         <View style={styles.buttonContent}>
           <Feather name={buttonIcon} size={100} color="white" />
           <Text style={styles.label}>{label}</Text>
@@ -38,22 +45,19 @@ const IconButton = ({
           )}
         </View>
       </TouchableOpacity>
+
       <View style={styles.captionContainer}>
         <Feather name={captionIcon} size={26} color="black" />
-        <Text style={styles.caption}>{caption}</Text>
+        <Text style={styles.caption}>{caption}  {location}</Text>
       </View>
       <View style={styles.containerBelow}>
         <View style={styles.columnBelow}>
           <Feather name="clock" size={24} color="black" />
-          <Text style={styles.captionBelow}>Duration</Text>
+          <Text style={styles.captionBelow}>Time        {time}</Text>
         </View>
         <View style={styles.columnBelow}>
           <Feather name="sunrise" size={24} color="black" />
-          <Text style={styles.captionBelow}>Check In</Text>
-        </View>
-        <View style={styles.columnBelow}>
-          <Feather name="sunset" size={24} color="black" />
-          <Text style={styles.captionBelow}>Check Out</Text>
+          <Text style={styles.captionBelow}>Checkin       {status.toUpperCase()}</Text>
         </View>
       </View>
     </View>
@@ -66,8 +70,24 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
   },
+  textInputStyle: {
+    marginTop: 20,
+  },
   name: {
+    borderWidth: 3,
+    textAlign: 'center',
+    paddingTop: 3,
+    width: 200,
     marginTop: 110,
+    fontSize: 24,
+    fontWeight: "bold",
+  },
+  id: {
+    borderWidth: 3,
+    textAlign: 'center',
+    paddingTop: 3,
+    width: 200,
+    marginTop: 5,
     fontSize: 24,
     fontWeight: "bold",
   },
@@ -115,18 +135,17 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     flexWrap: "wrap",
     marginTop: 10,
-    justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingVertical: 20,
     backgroundColor: "#F5F5F5",
-    height: 250,
     width: 280,
   },
   columnBelow: {
-    alignItems: "center",
+    alignItems: "flex-start",
     columnGap: 10,
   },
   captionBelow: {
+    width: 500,
     marginTop: 15,
     marginBottom: 10,
     fontSize: 14,

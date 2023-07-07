@@ -18,7 +18,7 @@ const checkinSchema = mongoose.Schema(
             required: [true, "Please enter a subject code"]
         },
 
-        students: [String],
+        students: [[String]],
 
         time: {
             type: String,

@@ -16,6 +16,10 @@ app.use(express.json());
 // Routes
 // saving user data in mongoDB
 
+// POST - Create new data
+// GET - Retrieve existing data
+// PUT - Update exiasting data 
+
 // User
 app.post("/student", async (req, res) => {
   try {
@@ -108,7 +112,7 @@ app.get("/student/:email/:password", async (req, res) => {
 });
 
 // update the fields in the mongoDB
-app.put("/student/:userID", async (req, res) => {
+app.put("/student/:id", async (req, res) => {
   try {
     const { id } = req.params;
 
@@ -159,20 +163,20 @@ app.get("/lecturer/:id", async (req, res) => {
 
 // login
 app.get("/lecturer/:email/:password", async (req, res) => {
-    try {
-      const { email } = req.params;
-      const { password } = req.params;
-  
-      const lecturer = await Lecturer.find(
-        { email, password },
-        { _id: 0, name: true, subjects: true, email: true, password: true }
-      );
-      res.status(200).json(lecturer);
-    } catch (error) {
-      console.log(error.message);
-      res.status(500).json({ message: error.message });
-    }
-  });
+  try {
+    const { email } = req.params;
+    const { password } = req.params;
+
+    const lecturer = await Lecturer.find(
+      { email, password },
+      { _id: 0, name: true, subjects: true, email: true, password: true }
+    );
+    res.status(200).json(lecturer);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).json({ message: error.message });
+  }
+});
 
 // update the fields in the mongoDB
 app.put("/lecturer/:id", async (req, res) => {
@@ -234,8 +238,21 @@ app.get("/checkin/:checkinCode", async (req, res) => {
 app.put("/checkin/:checkinCode", async (req, res) => {
   try {
     const { checkinCode } = req.params;
+    const { students } = req.body;
 
-    const UpdateCheckin = await Checkin.find(
+    const UpdateCheckin = await Checkin.findOneAndUpdate(
+      { checkinCode },
+      req.body,
+      { new: true }
+    );
+
+    if (!UpdateCheckin) {
+      return res
+        .status(404)
+        .json({ message: `cannot find checkin code ${checkinCode}` });
+    }
+
+    const updateCheckin = await Checkin.find(
       { checkinCode },
       {
         _id: 0,
@@ -246,13 +263,7 @@ app.put("/checkin/:checkinCode", async (req, res) => {
       }
     );
 
-    if (!UpdatedCheckin) {
-      return res
-        .status(404)
-        .json({ message: `cannot find checkin code ${checkinCode}` });
-    }
-
-    res.status(200).json(UpdateCheckin);
+    res.status(200).json(updateCheckin);
   } catch (error) {
     console.log(error.message);
     res.status(500).json({ message: error.message });

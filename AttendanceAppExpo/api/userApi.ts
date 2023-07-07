@@ -1,5 +1,6 @@
 import axios from "axios";
 
+// Deprecated
 export const updateUserStatus = async (
   name: string,
   id: number,

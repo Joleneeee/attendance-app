@@ -1,32 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Feather } from "@expo/vector-icons";
-import {
-  QueryClient,
-  QueryClientProvider,
-  useMutation,
-  useQuery,
-} from "@tanstack/react-query";
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Button,
-  TouchableOpacity,
-  FlatList,
-} from "react-native";
+import { Text, View } from "react-native";
 import IconButton from "./iconButton";
 import { updateUserStatus } from "./api/userApi";
 import axios from "axios";
-
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: 0,
-    },
-  },
-});
 
 const CheckinScreen = () => {
   const [currentDate, setCurrentDate] = useState("");

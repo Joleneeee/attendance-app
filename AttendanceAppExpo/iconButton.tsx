@@ -1,16 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Feather } from "@expo/vector-icons";
 import {
-  SafeAreaView,
   StyleSheet,
   Text,
   View,
   TextInput,
-  Button,
   TouchableOpacity,
-  FlatList,
 } from "react-native";
-import Alert from "./alert";
 
 const IconButton = ({
   buttonIcon,
@@ -20,7 +16,7 @@ const IconButton = ({
   caption,
   status,
   time,
-  location
+  location,
 }) => {
   const [isCheckedIn, setIsCheckedIn] = useState(false);
   const [name, setName] = useState(" ");
@@ -30,11 +26,18 @@ const IconButton = ({
     setIsCheckedIn(true);
   };
 
-
   return (
     <View style={styles.container}>
-      <TextInput style={styles.name} placeholder="Your Name" onChangeText={value => setName(value)} />
-      <TextInput style={styles.id} placeholder="Your ID" onChangeText={value => setId(value)} />
+      <TextInput
+        style={styles.name}
+        placeholder="Your Name"
+        onChangeText={(value) => setName(value)}
+      />
+      <TextInput
+        style={styles.id}
+        placeholder="Your ID"
+        onChangeText={(value) => setId(value)}
+      />
 
       <TouchableOpacity style={styles.button} onPress={() => onPress(name, id)}>
         <View style={styles.buttonContent}>
@@ -48,16 +51,20 @@ const IconButton = ({
 
       <View style={styles.captionContainer}>
         <Feather name={captionIcon} size={26} color="black" />
-        <Text style={styles.caption}>{caption}  {location}</Text>
+        <Text style={styles.caption}>
+          {caption} {location}
+        </Text>
       </View>
       <View style={styles.containerBelow}>
         <View style={styles.columnBelow}>
           <Feather name="clock" size={24} color="black" />
-          <Text style={styles.captionBelow}>Time        {time}</Text>
+          <Text style={styles.captionBelow}>Time {time}</Text>
         </View>
         <View style={styles.columnBelow}>
           <Feather name="sunrise" size={24} color="black" />
-          <Text style={styles.captionBelow}>Checkin       {status.toUpperCase()}</Text>
+          <Text style={styles.captionBelow}>
+            Checkin {status.toUpperCase()}
+          </Text>
         </View>
       </View>
     </View>
@@ -75,7 +82,7 @@ const styles = StyleSheet.create({
   },
   name: {
     borderWidth: 3,
-    textAlign: 'center',
+    textAlign: "center",
     paddingTop: 3,
     width: 200,
     marginTop: 110,
@@ -84,7 +91,7 @@ const styles = StyleSheet.create({
   },
   id: {
     borderWidth: 3,
-    textAlign: 'center',
+    textAlign: "center",
     paddingTop: 3,
     width: 200,
     marginTop: 5,

@@ -1,21 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Feather } from "@expo/vector-icons";
-import {
-  QueryClient,
-  QueryClientProvider,
-  useQuery,
-} from "@tanstack/react-query";
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Button,
-  TouchableOpacity,
-  FlatList,
-} from "react-native";
-import IconButton from "./iconButton";
+import React from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 import CheckinScreen from "./CheckinScreen";
 
 const queryClient = new QueryClient({

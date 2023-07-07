@@ -27,7 +27,7 @@ const CheckinScreen = () => {
     try {
       if (name != " " || id != 0) {
         const response = await axios.get(
-          `http://192.168.1.109:3000/user/${name}/${id}`
+          `http://192.168.0.179:3000/user/${name}/${id}`
         );
         const data = response.data[0];
         setUserStatus(data.status);
@@ -65,7 +65,7 @@ const CheckinScreen = () => {
         captionIcon="map-pin"
         caption="LOCATION:"
         status={userStatus}
-        time={userTime}
+        time={currentTime}
         location={userLocation}
       />
     </View>

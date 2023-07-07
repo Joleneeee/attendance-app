@@ -9,7 +9,7 @@ export const updateUserStatus = async (
     if (name != " " || id != 0) {
       if (userStatus === "false") {
         const response = await axios.put(
-          `http://192.168.1.109:3000/user/${name}/${id}`,
+          `http://192.168.0.179:3000/user/${name}/${id}`,
           { status: "true" }
         );
         console.log(response.data);

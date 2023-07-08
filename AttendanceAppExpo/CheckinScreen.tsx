@@ -3,25 +3,24 @@ import { Text, View } from "react-native";
 import IconButton from "./iconButton";
 import { updateUserStatus } from "./api/userApi";
 import axios from "axios";
+import moment from 'moment';
 
 const CheckinScreen = () => {
-  const [currentDate, setCurrentDate] = useState("");
-  const [currentTime, setCurrentTime] = useState("");
+  const [currentDate, setCurrentDate] = useState('');
+  const [currentTime, setCurrentTime] = useState('');
   const [userStatus, setUserStatus] = useState("-");
-  const [userTime, setUserTime] = useState("");
-  const [userLocation, setUserLocation] = useState("");
 
-  useEffect(() => {
-    var date = new Date().getDate(); // current Date
-    var month = new Date().getMonth() + 1; // current Month
-    var year = new Date().getFullYear(); // current Year
-    var hours = new Date().getHours() + 1; // current Hours
-    var min = new Date().getMinutes(); // current Minutes
-    var sec = new Date().getSeconds(); // current Seconds
-    setCurrentDate(date + "/" + month + "/" + year + " ");
-    setCurrentTime(hours + ":" + min + ":" + sec);
-    fetchUserStatus(" ", 0);
-  }, []);
+    useEffect(() => {
+      var date = moment()
+                    .utcOffset('+08:00')
+                    .format('MM/DD/YYYY');
+      setCurrentDate(date);
+      var time = moment()
+                    .utcOffset('+08:00')
+                    .format('hh:mm:ss a');
+      setCurrentTime(time);
+      fetchUserStatus(" ", 0);
+    }, []);
 
   // Deprecated 
   const fetchUserStatus = async (name: string, id: number) => {
@@ -32,22 +31,20 @@ const CheckinScreen = () => {
         );
         const data = response.data[0];
         setUserStatus(data.status);
-        setUserTime(data.time);
-        setUserLocation(data.location);
       }
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleButtonPress = (name: string, idStr: string) => {
+  const handleCheckedIn = (name: string, idStr: string) => {
     const id = parseInt(idStr, 10);
     fetchUserStatus(name, id);
     updateUserStatus(name, id, userStatus);
   };
 
   return (
-    <View style={{ display: "flex", paddingTop: 30 }}>
+    <View style={{ display: "flex", paddingTop: 100 }}>
       <Text
         style={{
           display: "flex",
@@ -57,17 +54,14 @@ const CheckinScreen = () => {
           justifyContent: "flex-end",
         }}
       >
-        {currentDate}
       </Text>
       <IconButton
         buttonIcon="check"
         label="CHECK IN"
-        onPress={handleButtonPress}
-        captionIcon="map-pin"
-        caption="LOCATION:"
+        onPress={handleCheckedIn}
         status={userStatus}
+        date={currentDate}
         time={currentTime}
-        location={userLocation}
       />
     </View>
   );

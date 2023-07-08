@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Feather } from "@expo/vector-icons";
+import { randomBytes } from "react-native-randombytes";
 import {
   StyleSheet,
   Text,
@@ -12,58 +13,53 @@ const IconButton = ({
   buttonIcon,
   label,
   onPress,
-  captionIcon,
-  caption,
   status,
+  date,
   time,
-  location,
 }) => {
-  const [isCheckedIn, setIsCheckedIn] = useState(false);
-  const [name, setName] = useState(" ");
-  const [id, setId] = useState("0");
+  const [number, setNumber] = useState("");
 
-  const handleButtonPress = () => {
-    setIsCheckedIn(true);
-  };
-
+  const handleCheckedIn = () => {
+    const randomNumber = randomBytes(5).toString("hex");
+    if (number === randomNumber) {
+      alert("Check-in successful!");
+  } else {
+    console.log('Invalid code');
+  }
+};
+  
   return (
+    <View style={styles.containerBelow}>
+        <View style={styles.columnBelow}>
+          <Feather name="clock" size={24} color="black" />
+          <Text style={styles.captionBelow}>Enter your check-in number: </Text>
+          <TextInput placeholder="Check-in number" value={number}onChangeText={setNumber}></TextInput>
+        </View>
     <View style={styles.container}>
-      <TextInput
-        style={styles.name}
-        placeholder="Your Name"
-        onChangeText={(value) => setName(value)}
-      />
-      <TextInput
-        style={styles.id}
-        placeholder="Your ID"
-        onChangeText={(value) => setId(value)}
-      />
-
-      <TouchableOpacity style={styles.button} onPress={() => onPress(name, id)}>
+      <TouchableOpacity style={styles.button} onPress={handleCheckedIn}>
         <View style={styles.buttonContent}>
           <Feather name={buttonIcon} size={100} color="white" />
           <Text style={styles.label}>{label}</Text>
-          {isCheckedIn && (
-            <Text style={styles.successMessage}>Successfully checked in!</Text>
-          )}
+          {/* {setNumber && (
+            <Text style={styles.successMessage}>Successfully checked in!</Text> */}
+          {/* )} */}
         </View>
       </TouchableOpacity>
-
-      <View style={styles.captionContainer}>
-        <Feather name={captionIcon} size={26} color="black" />
-        <Text style={styles.caption}>
-          {caption} {location}
-        </Text>
       </View>
+
       <View style={styles.containerBelow}>
         <View style={styles.columnBelow}>
           <Feather name="clock" size={24} color="black" />
-          <Text style={styles.captionBelow}>Time {time}</Text>
+          <Text style={styles.captionBelow}>Date             {date}</Text>
+        </View>
+        <View style={styles.columnBelow}>
+          <Feather name="clock" size={24} color="black" />
+          <Text style={styles.captionBelow}>Time            {time}</Text>
         </View>
         <View style={styles.columnBelow}>
           <Feather name="sunrise" size={24} color="black" />
           <Text style={styles.captionBelow}>
-            Checkin {status.toUpperCase()}
+            Checkin            {status.toUpperCase()}
           </Text>
         </View>
       </View>
@@ -71,32 +67,9 @@ const IconButton = ({
   );
 };
 
-export default IconButton;
-
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-  },
-  textInputStyle: {
-    marginTop: 20,
-  },
-  name: {
-    borderWidth: 3,
-    textAlign: "center",
-    paddingTop: 3,
-    width: 200,
-    marginTop: 110,
-    fontSize: 24,
-    fontWeight: "bold",
-  },
-  id: {
-    borderWidth: 3,
-    textAlign: "center",
-    paddingTop: 3,
-    width: 200,
-    marginTop: 5,
-    fontSize: 24,
-    fontWeight: "bold",
   },
   button: {
     backgroundColor: "#000000",
@@ -105,7 +78,7 @@ const styles = StyleSheet.create({
     height: 300,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 30,
+    marginTop: 50,
   },
   buttonContent: {
     // flexDirection: 'row',
@@ -131,21 +104,14 @@ const styles = StyleSheet.create({
     // alignItems: 'center',
     marginTop: 20,
   },
-  caption: {
-    marginLeft: 15,
-    marginBottom: 18,
-    marginTop: 4,
-    fontSize: 15,
-    textAlign: "center",
-  },
   containerBelow: {
     flexDirection: "column",
     flexWrap: "wrap",
-    marginTop: 10,
+    marginTop: 30,
     paddingHorizontal: 20,
     paddingVertical: 20,
     backgroundColor: "#F5F5F5",
-    width: 280,
+    width: 250,
   },
   columnBelow: {
     alignItems: "flex-start",
@@ -156,5 +122,8 @@ const styles = StyleSheet.create({
     marginTop: 15,
     marginBottom: 10,
     fontSize: 14,
+    fontWeight: "500",
   },
-});
+}); 
+
+export default IconButton;

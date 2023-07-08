@@ -20,7 +20,7 @@ const IconButton = ({
   const [number, setNumber] = useState("");
 
   const handleCheckedIn = () => {
-    const randomNumber = randomBytes(5).toString("hex");
+    const randomNumber = "5";
     if (number === randomNumber) {
       alert("Check-in successful!");
   } else {

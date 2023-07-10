@@ -49,7 +49,7 @@ app.get("/student/:id", async (req, res) => {
 });
 
 // update the fields in the mongoDB
-app.put("/student/:userID", async (req, res) => {
+app.put("/student/:id", async (req, res) => {
   try {
     const { id } = req.params;
 

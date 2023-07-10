@@ -1,16 +1,14 @@
 import axios from "axios";
 
-// Deprecated
 export const updateUserStatus = async (
-  name: string,
-  id: number,
+  id: string,
   userStatus: string
 ) => {
   try {
-    if (name != " " || id != 0) {
+    if (id != '0') {
       if (userStatus === "false") {
         const response = await axios.put(
-          `http://192.168.0.179:3000/user/${name}/${id}`,
+          `http://192.168.1.106:3000/student/${id}`,
           { status: "true" }
         );
         console.log(response.data);

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Feather } from "@expo/vector-icons";
-import { randomBytes } from "react-native-randombytes";
+
 import {
   StyleSheet,
   Text,

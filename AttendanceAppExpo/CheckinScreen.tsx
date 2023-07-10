@@ -22,7 +22,6 @@ const CheckinScreen = () => {
       fetchUserStatus(" ", 0);
     }, []);
 
-  // Deprecated 
   const fetchUserStatus = async (name: string, id: number) => {
     try {
       if (name != " " || id != 0) {

@@ -275,7 +275,7 @@ app.put("/checkin/:checkinCode", async (req, res) => {
 // Connect to MongoDB Atlas database using Mongoose ORM.  Replace the connection string with your own
 mongoose
   .connect(
-    "mongodb+srv://admin:1234@cluster0.trc0hn8.mongodb.net/?retryWrites=true&w=majority"
+    "mongodb+srv://admin:admin12345@cluster0.wwstlyi.mongodb.net/node-API?retryWrites=true&w=majority"
   )
   .then(() => {
     console.log("connected to MongoDB");

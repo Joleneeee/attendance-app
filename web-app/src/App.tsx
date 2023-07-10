@@ -78,7 +78,7 @@ const Login = () => {
     return regex.test(email);
   };
 
-  const handleSubmit = (e: { preventDefault: () => void; }) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!validateEmail(email)) {
@@ -86,11 +86,19 @@ const Login = () => {
       return;
     }
 
-    // Perform authentication logic here
-    // For simplicity, let's assume the login is successful
-    setIsLoggedIn(true);
-  };
+    try {
+      const user = await login(email, password);
+      const subjects = await getSubjects(user.id);
 
+      // Set the user and subjects in the state or pass them to the parent component
+      setIsLoggedIn(true);
+      console.log('Logged in successfully:', user, subjects);
+    } catch (error) {
+      setIsLoggedIn(false);
+      setEmailError('Login failed. Please try again.');
+      console.error('Login failed:', error);
+    }
+  };
   if (isLoggedIn) {
     return <div>You are logged in!</div>;
   }

@@ -1,62 +1,62 @@
 import React, { useState } from 'react';
 import './App.css'
 
-// const subjects = [
-//   { id: 1, name: 'PRG2014' },
-//   { id: 2, name: 'SEG2102' },
-//   { id: 3, name: 'PRG3014' }
-// ];
+const subjects = [
+  { id: 1, name: 'PRG2014' },
+  { id: 2, name: 'SEG2102' },
+  { id: 3, name: 'PRG3014' }
+];
 
-// const AttendanceCode = () => {
-//   const [attendanceCode, setAttendanceCode] = useState('');
-//   const [students, setStudents] = useState([]);
+const AttendanceCode = () => {
+  const [attendanceCode, setAttendanceCode] = useState('');
+  const [students, setStudents] = useState([]);
 
-//   const generateAttendanceCode = () => {
-//     // Generate a random 5-digit code
-//     const code = Math.floor(10000 + Math.random() * 90000).toString();
-//     setAttendanceCode(code);
-//     setStudents([]);
-//   };
+  const generateAttendanceCode = () => {
+    // Generate a random 5-digit code
+    const code = Math.floor(10000 + Math.random() * 90000).toString();
+    setAttendanceCode(code);
+    setStudents([]);
+  };
 
-//   const handleCheckIn = (student: any) => {
-//     setStudents((prevStudents) => [...prevStudents, student]);
-//   };
+  const handleCheckIn = (student: any) => {
+    setStudents((prevStudents) => [...prevStudents, student]);
+  };
 
-//   return (
-//     <div>
-//       <h3>Attendance Code: {attendanceCode}</h3>
-//       <button onClick={generateAttendanceCode}>Generate Attendance Code</button>
-//       <h4>Students</h4>
-//       <ul>
-//         {students.map((student, index) => (
-//           <li key={index}>{student}</li>
-//         ))}
-//       </ul>
-//     </div>
-//   );
-// };
+  return (
+    <div>
+      <h3>Attendance Code: {attendanceCode}</h3>
+      <button onClick={generateAttendanceCode}>Generate Attendance Code</button>
+      <h4>Students</h4>
+      <ul>
+        {students.map((student, index) => (
+          <li key={index}>{student}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
-// const SubjectList = ({ subjects }) => {
-//   const [selectedSubject, setSelectedSubject] = useState(null);
+const SubjectList = ({ subjects }) => {
+  const [selectedSubject, setSelectedSubject] = useState(null);
 
-//   const handleSubjectClick = (subject) => {
-//     setSelectedSubject(subject);
-//   };
+  const handleSubjectClick = (subject) => {
+    setSelectedSubject(subject);
+  };
 
-//   return (
-//     <div>
-//       <h2>Subjects</h2>
-//       <ul>
-//         {subjects.map((subject) => (
-//           <li key={subject.id} onClick={() => handleSubjectClick(subject)}>
-//             {subject.name}
-//           </li>
-//         ))}
-//       </ul>
-//       {selectedSubject && <AttendanceCode />}
-//     </div>
-//   );
-// };
+  return (
+    <div>
+      <h2>Subjects</h2>
+      <ul>
+        {subjects.map((subject) => (
+          <li key={subject.id} onClick={() => handleSubjectClick(subject)}>
+            {subject.name}
+          </li>
+        ))}
+      </ul>
+      {selectedSubject && <AttendanceCode />}
+    </div>
+  );
+};
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -119,6 +119,14 @@ const Login = () => {
         </div>
         <div className= "loginButton"></div>
         <button type="submit">Login</button>
+        <div className="App">
+      <h1>Lecturer Login</h1>
+      {isLoggedIn ? (
+        <SubjectList subjects={subjects} />
+      ) : (
+        <LoginForm handleSubmit={handleSubmit} />
+      )}
+    </div>
       </form>
     </div>
     </div>
@@ -136,10 +144,10 @@ const Login = () => {
 //   return (
 //     <div className="App">
 //       <h1>Lecturer Login</h1>
-//       {loggedIn ? (
+//       {isLoggedIn ? (
 //         <SubjectList subjects={subjects} />
 //       ) : (
-//         <LoginForm handleLogin={handleLogin} />
+//         <LoginForm handleSubmit={handleSubmit} />
 //       )}
 //     </div>
 //   );

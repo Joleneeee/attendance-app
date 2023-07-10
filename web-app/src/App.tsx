@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css'
 import axios from 'axios';
+import AttendanceCode from './AttendanceGenerator';
 
 const subjects = [
   { id: 1, name: 'PRG2014' },
@@ -8,56 +9,28 @@ const subjects = [
   { id: 3, name: 'PRG3014' }
 ];
 
-const AttendanceCode = () => {
-  const [attendanceCode, setAttendanceCode] = useState('');
-  const [students, setStudents] = useState([]);
 
-  const generateAttendanceCode = () => {
-    // Generate a random 5-digit code
-    const code = Math.floor(10000 + Math.random() * 90000).toString();
-    setAttendanceCode(code);
-    setStudents([]);
-  };
+// const SubjectList = ({ subjects }) => {
+//   const [selectedSubject, setSelectedSubject] = useState(null);
 
-  const handleCheckIn = (student: any) => {
-    setStudents((prevStudents) => [...prevStudents, student]);
-  };
+//   const handleSubjectClick = (subject) => {
+//     setSelectedSubject(subject);
+//   };
 
-  return (
-    <div>
-      <h3>Attendance Code: {attendanceCode}</h3>
-      <button onClick={generateAttendanceCode}>Generate Attendance Code</button>
-      <h4>Students</h4>
-      <ul>
-        {students.map((student, index) => (
-          <li key={index}>{student}</li>
-        ))}
-      </ul>
-    </div>
-  );
-};
-
-const SubjectList = ({ subjects }) => {
-  const [selectedSubject, setSelectedSubject] = useState(null);
-
-  const handleSubjectClick = (subject) => {
-    setSelectedSubject(subject);
-  };
-
-  return (
-    <div>
-      <h2>Subjects</h2>
-      <ul>
-        {subjects.map((subject) => (
-          <li key={subject.id} onClick={() => handleSubjectClick(subject)}>
-            {subject.name}
-          </li>
-        ))}
-      </ul>
-      {selectedSubject && <AttendanceCode />}
-    </div>
-  );
-};
+//   return (
+//     <div>
+//       <h2>Subjects</h2>
+//       <ul>
+//         {subjects.map((subject) => (
+//           <li key={subject.id} onClick={() => handleSubjectClick(subject)}>
+//             {subject.name}
+//           </li>
+//         ))}
+//       </ul>
+//       {selectedSubject && <AttendanceCode />}
+//     </div>
+//   );
+// };
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -84,7 +57,7 @@ const Login = () => {
     const data = response.data[0];
     console.log("data: " + data);
     return data;
-}
+  }
 
   const handleSubmit = async () => {
 
@@ -113,7 +86,7 @@ const Login = () => {
     // }
   };
   if (isLoggedIn) {
-    return <div>You are logged in!</div>;
+    return <AttendanceCode/>;
   }
 
   return (

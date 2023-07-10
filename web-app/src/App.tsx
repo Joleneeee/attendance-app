@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './App.css'
+import axios from 'axios';
 
 const subjects = [
   { id: 1, name: 'PRG2014' },
@@ -78,26 +79,38 @@ const Login = () => {
     return regex.test(email);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const lecturerLogin = async () => {
+    const response = await axios.get(`http://localhost:3000/lecturer/${email}/${password}`);
+    const data = response.data[0];
+    console.log("data: " + data);
+    return data;
+}
+
+  const handleSubmit = async () => {
 
     if (!validateEmail(email)) {
       setEmailError('Please enter a valid email address.');
       return;
     }
 
-    try {
-      const user = await login(email, password);
-      const subjects = await getSubjects(user.id);
+    const data = lecturerLogin();
 
-      // Set the user and subjects in the state or pass them to the parent component
+    if (await data) {
       setIsLoggedIn(true);
-      console.log('Logged in successfully:', user, subjects);
-    } catch (error) {
-      setIsLoggedIn(false);
-      setEmailError('Login failed. Please try again.');
-      console.error('Login failed:', error);
     }
+
+    // try {
+    //   const user = await login(email, password);
+    //   const subjects = await getSubjects(user.id);
+
+    //   // Set the user and subjects in the state or pass them to the parent component
+    //   setIsLoggedIn(true);
+    //   console.log('Logged in successfully:', user, subjects);
+    // } catch (error) {
+    //   setIsLoggedIn(false);
+    //   setEmailError('Login failed. Please try again.');
+    //   console.error('Login failed:', error);
+    // }
   };
   if (isLoggedIn) {
     return <div>You are logged in!</div>;
@@ -111,7 +124,7 @@ const Login = () => {
       alt="Sunway University logo"
     />
     <div className="container">
-      <form onSubmit={handleSubmit}>
+      <form>
         <div className="container">
           <label>Email: </label>
           <input type="email" value={email} onChange={handleEmailChange} />
@@ -126,16 +139,17 @@ const Login = () => {
           />
         </div>
         <div className= "loginButton"></div>
-        <button type="submit">Login</button>
+        
         <div className="App">
-      <h1>Lecturer Login</h1>
-      {isLoggedIn ? (
+      {/* <h1>Lecturer Login</h1> */}
+      {/* {isLoggedIn ? (
         <SubjectList subjects={subjects} />
       ) : (
         <LoginForm handleSubmit={handleSubmit} />
-      )}
+      )} */}
     </div>
       </form>
+      <button onClick={handleSubmit}>Login</button>
     </div>
     </div>
   );

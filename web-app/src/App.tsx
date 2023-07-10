@@ -70,9 +70,9 @@
 import React, { useState } from 'react';
 
 const subjects = [
-  { id: 1, name: 'Subject 1' },
-  { id: 2, name: 'Subject 2' },
-  { id: 3, name: 'Subject 3' }
+  { id: 1, name: 'PRG2014' },
+  { id: 2, name: 'SEG2102' },
+  { id: 3, name: 'PRG3014' }
 ];
 
 const AttendanceCode = () => {

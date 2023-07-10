@@ -35,7 +35,6 @@ const AttendanceCode = () => {
       subjectCode: "PRG9999",
       time: time,
       date: date,
-      students: [["Alex", "1903456"], ["Ben", "1903566"]]
     });
 
     alert('Attendance Checking Started');

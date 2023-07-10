@@ -5,7 +5,7 @@ import { updateUserStatus } from "./api/userApi";
 import axios from "axios";
 import moment from 'moment';
 
-const CheckinScreen = () => {
+const CheckinScreen = (setName, setStudentId) => {
   const [currentDate, setCurrentDate] = useState('');
   const [currentTime, setCurrentTime] = useState('');
 

@@ -5,10 +5,9 @@ import { updateUserStatus } from "./api/userApi";
 import axios from "axios";
 import moment from 'moment';
 
-const CheckinScreen = () => {
+const CheckinScreen = (setName, setStudentId) => {
   const [currentDate, setCurrentDate] = useState('');
   const [currentTime, setCurrentTime] = useState('');
-  const [userStatus, setUserStatus] = useState("-");
 
     useEffect(() => {
       var date = moment()
@@ -19,28 +18,8 @@ const CheckinScreen = () => {
                     .utcOffset('+08:00')
                     .format('hh:mm:ss a');
       setCurrentTime(time);
-      fetchUserStatus(" ", 0);
     }, []);
 
-  const fetchUserStatus = async (name: string, id: number) => {
-    try {
-      if (name != " " || id != 0) {
-        const response = await axios.get(
-          `http://192.168.0.179:3000/user/${name}/${id}`
-        );
-        const data = response.data[0];
-        setUserStatus(data.status);
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleCheckedIn = (name: string, idStr: string) => {
-    const id = parseInt(idStr, 10);
-    fetchUserStatus(name, id);
-    updateUserStatus(name, id, userStatus);
-  };
 
   return (
     <View style={{ display: "flex", paddingTop: 100 }}>
@@ -57,8 +36,6 @@ const CheckinScreen = () => {
       <IconButton
         buttonIcon="check"
         label="CHECK IN"
-        onPress={handleCheckedIn}
-        status={userStatus}
         date={currentDate}
         time={currentTime}
       />

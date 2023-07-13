@@ -1,14 +1,13 @@
-import React, { useState } from 'react';
-import './App.css'
-import axios from 'axios';
-import AttendanceCode from './AttendanceGenerator';
+import React, { useState } from "react";
+import "./App.css";
+import axios from "axios";
+import AttendanceCode from "./AttendanceGenerator";
 
 const subjects = [
-  { id: 1, name: 'PRG2014' },
-  { id: 2, name: 'SEG2102' },
-  { id: 3, name: 'PRG3014' }
+  { id: 1, name: "PRG2014" },
+  { id: 2, name: "SEG2102" },
+  { id: 3, name: "PRG3014" },
 ];
-
 
 // const SubjectList = ({ subjects }) => {
 //   const [selectedSubject, setSelectedSubject] = useState(null);
@@ -33,17 +32,21 @@ const subjects = [
 // };
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [emailError, setEmailError] = useState('');
+  const [emailError, setEmailError] = useState("");
 
-  const handleEmailChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+  const handleEmailChange = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setEmail(e.target.value);
-    setEmailError('');
+    setEmailError("");
   };
 
-  const handlePasswordChange = (e: { target: { value: React.SetStateAction<string>; }; }) => {
+  const handlePasswordChange = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
     setPassword(e.target.value);
   };
 
@@ -53,16 +56,17 @@ const Login = () => {
   };
 
   const lecturerLogin = async () => {
-    const response = await axios.get(`http://localhost:3000/lecturer/${email}/${password}`);
+    const response = await axios.get(
+      `http://localhost:3000/lecturer/${email}/${password}`
+    );
     const data = response.data[0];
     console.log("data: " + data);
     return data;
-  }
+  };
 
   const handleSubmit = async () => {
-
     if (!validateEmail(email)) {
-      setEmailError('Please enter a valid email address.');
+      setEmailError("Please enter a valid email address.");
       return;
     }
 
@@ -86,7 +90,7 @@ const Login = () => {
     // }
   };
   if (isLoggedIn) {
-    return <AttendanceCode/>;
+    return <AttendanceCode />;
   }
 
   return (
@@ -118,11 +122,6 @@ const Login = () => {
               onChange={handlePasswordChange}
             />
           </div>
-          <div className="loginButton">
-            <button className="button" onClick={handleSubmit}>
-              Login
-            </button>
-          </div>
           <div className="App">
             {/* <h1>Lecturer Login</h1> */}
             {/* {isLoggedIn ? (
@@ -132,11 +131,15 @@ const Login = () => {
             )} */}
           </div>
         </form>
+        <div className="loginButton">
+          <button className="button" onClick={handleSubmit}>
+            Login
+          </button>
+        </div>
       </div>
     </div>
   );
-          }  
-
+};
 
 // const App = () => {
 //   const [loggedIn, setLoggedIn] = useState(false);
@@ -158,5 +161,3 @@ const Login = () => {
 // };
 
 export default Login;
-
-

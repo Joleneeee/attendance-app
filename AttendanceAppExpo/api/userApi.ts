@@ -8,7 +8,7 @@ export const updateUserStatus = async (
     if (id != '0') {
       if (userStatus === "false") {
         const response = await axios.put(
-          `http://192.168.1.106:3000/student/${id}`,
+          `http://192.168.0.110:3000/student/${id}`,
           { status: "true" }
         );
         console.log(response.data);

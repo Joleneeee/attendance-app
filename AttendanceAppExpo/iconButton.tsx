@@ -26,7 +26,7 @@ const IconButton = ({ buttonIcon, label, date, time }) => {
 
   const getStudentList = async () => {
     const response = await axios.get(
-      `http://192.168.1.106:3000/checkin/${number}`
+      `http://192.168.0.110:3000/checkin/${number}`
     );
     const data = response.data[0];
     setStudentList(data.students);

@@ -90,43 +90,52 @@ const Login = () => {
   }
 
   return (
-    <div>
-    <img
-      src="/sunwaylogo.jpg"
-      className="image"
-      alt="Sunway University logo"
-    />
     <div className="container">
-      <form>
-        <div className="container">
-          <label>Email: </label>
-          <input type="email" value={email} onChange={handleEmailChange} />
-          {emailError && <div className="error">{emailError}</div>}
-        </div>
-        <div className="container">
-          <label>Password: </label>
-          <input
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-          />
-        </div>
-        <div className= "loginButton"></div>
-        
-        <div className="App">
-      {/* <h1>Lecturer Login</h1> */}
-      {/* {isLoggedIn ? (
-        <SubjectList subjects={subjects} />
-      ) : (
-        <LoginForm handleSubmit={handleSubmit} />
-      )} */}
-    </div>
-      </form>
-      <button onClick={handleSubmit}>Login</button>
-    </div>
+      <img
+        src="/sunwaylogo.jpg"
+        className="image"
+        alt="Sunway University logo"
+      />
+      <div>
+        <form>
+          <div>
+            <label className="label">Email: </label>
+            <input
+              type="email"
+              className="input"
+              value={email}
+              onChange={handleEmailChange}
+            />
+            {emailError && <div className="error">{emailError}</div>}
+          </div>
+          <br />
+          <div>
+            <label className="label">Password: </label>
+            <input
+              type="password"
+              className="input"
+              value={password}
+              onChange={handlePasswordChange}
+            />
+          </div>
+          <div className="loginButton">
+            <button className="button" onClick={handleSubmit}>
+              Login
+            </button>
+          </div>
+          <div className="App">
+            {/* <h1>Lecturer Login</h1> */}
+            {/* {isLoggedIn ? (
+              <SubjectList subjects={subjects} />
+            ) : (
+              <LoginForm handleSubmit={handleSubmit} />
+            )} */}
+          </div>
+        </form>
+      </div>
     </div>
   );
-};
+          }  
 
 
 // const App = () => {
